@@ -373,6 +373,7 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
   fileprivate func addEditingChangedObserver() {
     self.addTarget(self, action: #selector(SkyFloatingLabelTextField.editingChanged), for: .editingDidBegin)
     self.addTarget(self, action: #selector(SkyFloatingLabelTextField.editingChanged), for: .editingChanged)
+    self.addTarget(self, action: #selector(SkyFloatingLabelTextField.editingDidEnd), for: .editingDidEnd)
   }
   
   /**
@@ -381,6 +382,11 @@ open class SkyFloatingLabelTextField: UITextField { // swiftlint:disable:this ty
   @objc open func editingChanged() {
     updateControl(true)
     updateTitleLabel(true)
+  }
+  
+  @objc open func editingDidEnd() {
+    self.resignFirstResponder()
+    self.layoutIfNeeded()
   }
   
   // MARK: create components
